@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install 
+Operation = Remove 
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = Removing old packages from cache (keep current and last)...
+When = PostTransaction
+Exec = /usr/bin/paccache -rvk2
