@@ -1,0 +1,9 @@
+[Trigger]
+Operation 	= Upgrade
+Type 		= Package
+Target		= elasticsearch
+
+[Action]
+Description	= Update ElasticSearch plugins.
+When		= PostTransaction
+Exec 		= /bin/sh -c "/usr/bin/elasticsearch-plugin remove analysis-icu && /usr/bin/elasticsearch-plugin install analysis-icu"
