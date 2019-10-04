@@ -1,0 +1,13 @@
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Type = Package
+Target = libreoffice
+Target = libreoffice-fresh
+
+[Action]
+Description = Updating libreoffice desktop files to enable opening shared files ...
+When = PostTransaction
+Depends = reflector
+Exec = /bin/sh -c "sed -i 's/X-GIO-NoFuse=true/#X-GIO-NoFuse=true/' /usr/share/applications/libreoffice-*"
+
