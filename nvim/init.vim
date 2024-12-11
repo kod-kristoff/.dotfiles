@@ -1,4 +1,4 @@
-"set clipboard+=unnamedplus
+set clipboard+=unnamedplus
 
 " no swap file
 set noswapfile
