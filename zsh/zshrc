@@ -1,1 +1,7 @@
 source "$XDG_CONFIG_HOME/zsh/aliases"
+
+autoload -U compinit; compinit
+
+# Autocomplete hidden files
+_comp_options+=(globdots)
+source "$DOTFILES/zsh/external/completion.zsh"
