@@ -1,16 +1,48 @@
 #!/bin/bash
 
-##################
-# nvim
-##################
-mkdir --parent "$HOME/.config/nvim"
-mkdir --parent "$HOME/.config/nvim/undo"
-ln -sf "$HOME/.dotfiles/nvim/init.vim" "$HOME/.config/nvim"
+############
+# includes #
+############
 
-##################
-# zsh
-##################
-mkdir -p "$HOME/.config/zsh"
-ln -sf "$HOME/.dotfiles/zsh/zshenv" "$HOME/.zshenv"
-ln -sf "$HOME/.dotfiles/zsh/zshrc" "$HOME/.config/zsh/.zshrc"
-ln -sf "$HOME/.dotfiles/zsh/aliases" "$HOME/.config/zsh/aliases"
+# source ./install_config
+source ./colours.sh
+source ./install_functions.sh
+source ./zsh/zshenv
+
+################
+# presentation #
+################
+
+echo -e "
+${yellow}
+          _ ._  _ , _ ._
+        (_ ' ( \`  )_  .__)
+      ( (  (    )   \`)  ) _)
+     (__ (_   (_ . _) _) ,__)
+           ~~\ ' . /~~
+         ,::: ;   ; :::,
+        ':::::::::::::::'
+ ____________/_ __ \_________________
+|                                    |
+| Welcome to kod-kristoff's dotfiles |
+|____________________________________|
+"
+
+echo -e "${yellow}!!! ${red}WARNING${yellow} !!!"
+echo -e "${light_red}This script will delete all your configuration files!"
+echo -e "${light_red}Use it at your own risks."
+
+if [ $# -ne 1 ] || [ "$1" != "-y" ];
+    then
+        echo -e "${yellow}Press a key to continue...\n"
+        read key;
+fi
+
+###########
+# INSTALL #
+###########
+
+source "$DOTFILES/install/install-zsh.sh"
+
+dot_is_installed nvim && dot_install nvim
+dot_is_installed sway && dot_install sway
