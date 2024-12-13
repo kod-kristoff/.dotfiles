@@ -20,8 +20,9 @@ source "$XDG_CONFIG_HOME/zsh/aliases"
 # | Prompt |
 # +--------+
 
-fpath=($DOTFILES/zsh/prompt $fpath)
-source $DOTFILES/zsh/prompt/prompt_purification_setup
+#fpath=($DOTFILES/zsh/prompt $fpath)
+#source $DOTFILES/zsh/prompt/prompt_purification_setup
+eval "$(starship init zsh)"
 
 # +------------+
 # | Completion |
