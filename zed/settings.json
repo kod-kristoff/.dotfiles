@@ -1,0 +1,95 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette
+{
+  "features": {
+    "inline_completion_provider": "none"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "Monokai Charcoal (yellow)",
+    "dark": "One Dark"
+  },
+  // Remove the < > buttons from the tab bar
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false
+  },
+
+  // Show file type icons in the tab bar. Also color them according to the
+  // git status.
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+
+  // Decrease the horizontal indent size of files & folders in the project
+  // panel to avoid horizontal scrolling
+  "project_panel": {
+    "indent_size": 16
+  },
+
+  // Set a preferred line lenth, showing a vertical gutter bar
+  "preferred_line_length": 160,
+
+  // Enable Vim mode. You probably found this already if you care.
+  "vim_mode": true,
+
+  // Use relative line numbers.
+  "relative_line_numbers": true,
+
+  // Allow f and t motions to extend across multiple lines.
+  "use_multiline_find": true,
+
+  // Scroll the whole view if your cursor is less than 20 horizontal lines
+  // away from either part of your file viewport.
+  "vertical_scroll_margin": 20,
+
+  "languages": {
+    "Python": {
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "code_actions": {
+            "source.organizeImports.ruff": true,
+            "source.fixAll.ruff": true
+          }
+        },
+        {
+          "language_server": { "name": "ruff" }
+        }
+      ],
+      // "language_servers": ["ruff"]
+      // Or, if there are other language servers you want to use with Python
+      "language_servers": ["pyright", "ruff"]
+    },
+    "Markdown": {
+      // Wrap text according to the previously defined preferred line length.
+      "soft_wrap": "preferred_line_length",
+
+      // do not remove any trailing whitespace since line breaks in
+      // lists (without adding a new punctuation) rely on whitespaces.
+      "remove_trailing_whitespace_on_save": false
+    }
+  },
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python.analysis": {
+          "diagnosticMode": "workspace",
+          "typeCheckingMode": "strict"
+        },
+        "python": {
+          "pythonPath": ".venv/bin/python"
+        }
+      }
+    }
+  }
+}
