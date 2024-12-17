@@ -114,6 +114,9 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     }
 
     bindsym $mod+BackSpace mode "$mode_system"
+
+    # lock screen
+    bindsym $mod+CTRL+Shift+l exec --no-start-id $swaplockwall
 #
 # Moving around:
 #
@@ -213,6 +216,7 @@ set $mindmap "8: mindmap"
     # floating pop up automatically
     for_window [window_role="pop-up"] floating enable
     for_window [window_role="task_dialog"] floating enable
+    for_window [id="gnome-calculator"] floating enable; border pixel
 
 #
 # Lockscreen:
