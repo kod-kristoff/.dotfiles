@@ -10,11 +10,20 @@ setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
 
+source "$DOTFILES/zsh/external/bd.zsh"
+
 # +---------+
 # | Aliases |
 # +---------+
 #
 source "$XDG_CONFIG_HOME/zsh/aliases"
+
+
+# +---------+
+# | SCRIPTS |
+# +---------+
+
+source "$DOTFILES/zsh/scripts.zsh"
 
 # +--------+
 # | Prompt |
@@ -24,6 +33,27 @@ source "$XDG_CONFIG_HOME/zsh/aliases"
 #source $DOTFILES/zsh/prompt/prompt_purification_setup
 eval "$(starship init zsh)"
 
+
+# +-----------+
+# | VI KEYMAP |
+# +-----------+
+
+# Vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+# change cursor
+source "$DOTFILES/zsh/plugins/cursor_mode"
+
+zmodload zsh/complist 
+bindkey -M menuselect 'h' vi-backward-char 
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char 
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 # +------------+
 # | Completion |
 # +------------+
