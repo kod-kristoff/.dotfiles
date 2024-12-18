@@ -63,3 +63,13 @@ autoload -U compinit; compinit
 # Autocomplete hidden files
 _comp_options+=(globdots)
 source "$DOTFILES/zsh/external/completion.zsh"
+
+# 
+# FZF
+#
+
+if [ $(command -v "fzf") ]; 
+then 
+    source /usr/share/fzf/completion.zsh 
+    source /usr/share/fzf/key-bindings.zsh
+fi
