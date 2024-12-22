@@ -1,10 +1,21 @@
-call plug#begin("$XDG_CONFIG_HOME/nvim/plugged")
-    Plug 'chrisbra/csv.vim'
-    Plug 'moll/vim-bbye'
-    Plug 'simeji/winresizer'
-    Plug 'junegunn/fzf.vim'
-    Plug 'simnalamburt/vim-mundo'
-call plug#end()
+" +------------+
+" | leader key |
+" +------------+ {{{
+
+" Configure leader key
+let mapleader = "\<space>"
+let maplocalleader = "\<space>"
+
+" }}}
+
+" +----------------+
+" | install plugin |
+" +----------------+ {{{
+
+" Source plugin definition file
+source $VIMCONFIG/init_plugins.vim
+
+" }}}
 
 set clipboard+=unnamedplus
 
@@ -29,7 +40,6 @@ set softtabstop=4
 set shiftwidth=4
 
 nnoremap <space> <nop> 
-let mapleader = "\<space>" 
 
 nnoremap <leader>bn :bn<cr> ;buffer next 
 nnoremap <leader>tn gt ;new tab
