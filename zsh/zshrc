@@ -89,8 +89,14 @@ source "$DOTFILES/zsh/external/completion.zsh"
 
 if [ $(command -v "fzf") ];
 then
-    source /usr/share/fzf/completion.zsh
-    source /usr/share/fzf/key-bindings.zsh
+    if [ -e /usr/share/fzf/completion.zsh ]; 
+    then
+        source /usr/share/fzf/completion.zsh
+        source /usr/share/fzf/key-bindings.zsh
+    else
+        source /data/data/com.termux/files/usr/share/fzf/completion.zsh
+        source /data/data/com.termux/files/usr/share/fzf/key-bindings.zsh
+    fi
 fi
 
 # Load custom rc if present
