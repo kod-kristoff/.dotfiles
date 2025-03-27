@@ -22,3 +22,13 @@ alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
 alias gpl='git pull'
+alias gsw='git switch'
+alias gst='git stack'
+alias gstp='git stack --push'
+alias gsy='git sync'
+
+# +-----+
+# | cog |
+# +-----+
+
+alias cogci='cog commit'
