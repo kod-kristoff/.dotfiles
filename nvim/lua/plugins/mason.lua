@@ -5,7 +5,16 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
-		require("mason").setup()
+		require("mason").setup({
+			PATH = "append",
+			ui = {
+				icons = {
+					package_installed = "✓",
+					package_pending = "➜",
+					package_uninstalled = "✗",
+				},
+			},
+		})
 
 		require("mason-lspconfig").setup({
 			automatic_installation = true,
@@ -17,15 +26,15 @@ return {
 				-- "tsserver",
 				-- "pyright",
 				-- "tailwindcss",
-				"rust-analyzer",
+				-- "rust_analyzer",
 			},
 		})
 
 		require("mason-tool-installer").setup({
 			ensure_installed = {
 				-- "prettier",
-				"stylua", -- lua formatter
-				"ruff", -- python formatter
+				-- "stylua", -- lua formatter
+				-- "ruff", -- python formatter
 				-- "black", -- python formatter
 				-- "pylint",
 				-- "eslint_d",
