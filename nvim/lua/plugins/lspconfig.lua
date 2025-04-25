@@ -88,25 +88,25 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["ruff_lsp"] = function()
-				nvim_lsp["ruff_lsp"].setup({
-					on_attach = format,
-					capabilities = capabilities,
-				})
-			end,
-			["rust_analyzer"] = function()
-				nvim_lsp["rust_analyzer"].setup({
-					on_attach = format,
-					capabilities = capabilities,
-					settings = {
-						["rust_analyzer"] = {
-							checkOnSave = {
-								command = "clippy",
-							},
-						},
-					},
-				})
-			end,
+			-- ["ruff_lsp"] = function()
+			-- 	nvim_lsp["ruff_lsp"].setup({
+			-- 		on_attach = format,
+			-- 		capabilities = capabilities,
+			-- 	})
+			-- end,
+			-- ["rust_analyzer"] = function()
+			-- 	nvim_lsp["rust_analyzer"].setup({
+			-- 		on_attach = format,
+			-- 		capabilities = capabilities,
+			-- 		settings = {
+			-- 			["rust_analyzer"] = {
+			-- 				checkOnSave = {
+			-- 					command = "clippy",
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 	})
+			-- end,
 		})
 	end,
 }
