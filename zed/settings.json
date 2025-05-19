@@ -73,6 +73,7 @@
     "Markdown": {
       // Wrap text according to the previously defined preferred line length.
       "soft_wrap": "preferred_line_length",
+      "format_on_save": "on",
 
       // do not remove any trailing whitespace since line breaks in
       // lists (without adding a new punctuation) rely on whitespaces.
