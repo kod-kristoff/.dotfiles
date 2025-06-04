@@ -104,3 +104,12 @@ fi
 if [ -e "$ZDOTDIR/.zshrc-local" ]; then
     source "$ZDOTDIR/.zshrc-local"
 fi
+
+#
+# direnv
+#
+
+if [ $(command -v "direnv") ];
+then
+    eval "$(direnv hook zsh)"
+fi
