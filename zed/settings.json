@@ -68,7 +68,7 @@
       ],
       // "language_servers": ["ruff"]
       // Or, if there are other language servers you want to use with Python
-      "language_servers": ["pyright", "ruff"]
+      "language_servers": ["ty", "!pyrefly", "ruff", "!pylsp", "!basedpyright", "!pyright"]
     },
     "Markdown": {
       // Wrap text according to the previously defined preferred line length.
@@ -82,7 +82,7 @@
   },
   "lsp": {
     "pyright": {
-      "binary": { "path": "/usr/bin/pyright-langserver", "arguments": ["--stdio"] },
+      // "binary": { "path": "/usr/bin/pyright-langserver", "arguments": ["--stdio"] },
       "settings": {
         "python.analysis": {
           "diagnosticMode": "workspace",
@@ -90,15 +90,31 @@
         },
         "python": {
           "pythonPath": ".venv/bin/python"
+        },
+        "basedpyright.analysis": {
+          "diagnosticMode": "workspace",
+          "inlayHints": {
+            "callArgumentsNames": true
+          }
         }
       }
-    }
-  },
-  "rust-analyzer": {
-    "initialization_options": {
-      "checkOnSave": {
-        "enable": true,
-        "command": "clippy"
+    },
+    "pyrefly": {
+      "settings": { "pythonPath": ".venv/bin/python" },
+      "pyrefly": { "project_includes": ["src/**/*.py", "tests/**/*.py"], "project_excludes": ["**/.[!/.]", "**/*venv/**"], "search_path": ["src"] }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "checkOnSave": {
+          "enable": true,
+          "command": "clippy"
+        }
+      }
+    },
+    "ty": {
+      "binary": {
+        "path": "/usr/bin/ty",
+        "arguments": ["server"]
       }
     }
   }
