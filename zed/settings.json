@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "disable_ai": true,
   "features": {
     "edit_prediction_provider": "none"
   },
@@ -46,7 +47,7 @@
   "relative_line_numbers": true,
 
   // Allow f and t motions to extend across multiple lines.
-  "use_multiline_find": true,
+  // "use_multiline_find": true,
 
   // Scroll the whole view if your cursor is less than 20 horizontal lines
   // away from either part of your file viewport.
@@ -99,10 +100,10 @@
         }
       }
     },
-    "pyrefly": {
-      "settings": { "pythonPath": ".venv/bin/python" },
-      "pyrefly": { "project_includes": ["src/**/*.py", "tests/**/*.py"], "project_excludes": ["**/.[!/.]", "**/*venv/**"], "search_path": ["src"] }
-    },
+    // "pyrefly": {
+    //   "settings": { "pythonPath": ".venv/bin/python" },
+    //   "pyrefly": { "project_includes": ["src/**/*.py", "tests/**/*.py"], "project_excludes": ["**/.[!/.]", "**/*venv/**"], "search_path": ["src"] }
+    // },
     "rust-analyzer": {
       "initialization_options": {
         "checkOnSave": {
