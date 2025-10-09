@@ -49,6 +49,7 @@
   // Allow f and t motions to extend across multiple lines.
   // "use_multiline_find": true,
 
+  "format_on_save": "on",
   // Scroll the whole view if your cursor is less than 20 horizontal lines
   // away from either part of your file viewport.
   "vertical_scroll_margin": 20,
@@ -79,7 +80,9 @@
       // do not remove any trailing whitespace since line breaks in
       // lists (without adding a new punctuation) rely on whitespaces.
       "remove_trailing_whitespace_on_save": false
-    }
+    },
+    "TOML": { "format_on_save": "on", "language_servers": ["tombi"] },
+    "YAML": { "tab_size": 2 }
   },
   "lsp": {
     "pyright": {
