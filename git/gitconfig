@@ -1,0 +1,70 @@
+# Detta är Gits användarspecifika konfigurationsfil
+[include]
+    path = ~/.gitconfig-user.inc
+[includeIf "gitdir:~/projekt/work/"]
+	path = ~/.gitconfig-work.inc
+[includeIf "gitdir:~/projekt/personal/"]
+	path = ~/.gitconfig-personal.inc
+[includeIf "gitdir:~/.cache/uv/**"]
+    path = ~/.gitconfig-nolfs.inc
+[core]
+	editor = vim +14 +startinsert
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[diff]
+	external = difft
+	submodule = log
+	colorMoved = default
+# [url "git@github.com:/"]
+#	insteadOf = https://github.com/
+[alias]
+	co = checkout
+	st = status
+	ci = commit
+	br = branch
+	sw = switch
+	rb = rebase
+	fpush = push
+	# difft
+	dl = log -p --ext-diff
+	ds = show --ext-diff
+	# git-stack
+	next = stack next
+	prev = stack previous
+	reword = stack reword
+	amend = stack amend
+	sync = stack sync
+	run = stack run
+[cola]
+	spellcheck = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[pull]
+    rebase = true
+[delta]
+	navigate = true
+    side-by-side = true
+    line-numbers-left-format = ""
+    line-numbers-right-format = "| "
+    syntax-theme = Monokai Extended
+[commit]
+	template = /home/kristoffer/Mallar/git-commit-template.txt
+[init]
+	defaultBranch = main
+[merge]
+	conflictstyle = diff3
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
+[rerere]
+	enabled = true
+	autoUpdate = true
+[tag]
+    sort = version:refname
+[help]
+    autocorrect = prompt

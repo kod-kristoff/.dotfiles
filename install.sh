@@ -44,6 +44,8 @@ fi
 
 source "$DOTFILES/install/install-zsh.sh"
 
+dot_install git
+
 dot_is_installed gitui && dot_install gitui
 dot_is_installed nvim && dot_install nvim
 dot_is_installed sway && dot_install sway
