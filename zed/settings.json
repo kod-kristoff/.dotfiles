@@ -58,12 +58,8 @@
     "Python": {
       "format_on_save": "on",
       "formatter": [
-        {
-          "code_actions": {
-            "source.organizeImports.ruff": true,
-            "source.fixAll.ruff": true
-          }
-        },
+        { "code_action": "source.organizeImports.ruff" },
+        { "code_action": "source.fixAll.ruff" },
         {
           "language_server": { "name": "ruff" }
         }
@@ -82,31 +78,9 @@
       "remove_trailing_whitespace_on_save": false
     },
     "TOML": { "format_on_save": "on", "language_servers": ["tombi"] },
-    "YAML": { "tab_size": 2 }
+    "YAML": { "tab_size": 2, "formatter": "language_server" }
   },
   "lsp": {
-    "pyright": {
-      // "binary": { "path": "/usr/bin/pyright-langserver", "arguments": ["--stdio"] },
-      "settings": {
-        "python.analysis": {
-          "diagnosticMode": "workspace",
-          "typeCheckingMode": "strict"
-        },
-        "python": {
-          "pythonPath": ".venv/bin/python"
-        },
-        "basedpyright.analysis": {
-          "diagnosticMode": "workspace",
-          "inlayHints": {
-            "callArgumentsNames": true
-          }
-        }
-      }
-    },
-    // "pyrefly": {
-    //   "settings": { "pythonPath": ".venv/bin/python" },
-    //   "pyrefly": { "project_includes": ["src/**/*.py", "tests/**/*.py"], "project_excludes": ["**/.[!/.]", "**/*venv/**"], "search_path": ["src"] }
-    // },
     "rust-analyzer": {
       "initialization_options": {
         "checkOnSave": {
@@ -119,6 +93,16 @@
       "binary": {
         "path": "/usr/bin/ty",
         "arguments": ["server"]
+      }
+    },
+    "yaml-language-server": {
+      "settings": {
+        "yaml": {
+          "keyOrdering": false,
+          "format": {
+            "singleQuote": false
+          }
+        }
       }
     }
   }
