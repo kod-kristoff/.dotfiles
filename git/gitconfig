@@ -26,6 +26,7 @@
 	sw = switch
 	rb = rebase
 	fpush = push
+    fixup = "!git log -n 50 --oneline --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
 	# difft
 	dl = log -p --ext-diff
 	ds = show --ext-diff
