@@ -37,8 +37,11 @@ alias gp='git push'
 alias gpf='git push --force-with-lease'
 alias gpl='git pull'
 alias gsw='git switch'
+
+# git-stack
 alias gst='git stack'
 alias gstp='git stack --push'
+alias gstrb='git stack --rebase'
 alias gsy='git sync'
 
 # +------------+
