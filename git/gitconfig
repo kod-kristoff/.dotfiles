@@ -8,7 +8,7 @@
 [includeIf "gitdir:~/.cache/uv/**"]
     path = ~/.gitconfig-nolfs.inc
 [core]
-	editor = vim +14 +startinsert
+	editor = nvim +14 -c 'startinsert'
     pager = delta
 [interactive]
     diffFilter = delta --color-only
@@ -25,7 +25,7 @@
 	br = branch
 	sw = switch
 	rb = rebase
-	fpush = push
+	fpush = push --force-with-lease
     fixup = "!git log -n 50 --oneline --no-merges | fzf | cut -c -7 | xargs -o git commit --fixup"
 	# difft
 	dl = log -p --ext-diff
@@ -69,3 +69,14 @@
     sort = version:refname
 [help]
     autocorrect = prompt
+[pager]
+    blame = delta
+    diff = delta
+    reflog = delta
+    show = delta
+[lfs]
+	concurrenttransfers = 3
+[lfs "customtransfer.xet"]
+	path = git-xet
+	args = transfer
+	concurrent = true
