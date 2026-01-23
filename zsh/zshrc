@@ -77,6 +77,7 @@ bindkey -M vicmd v edit-command-line
 # +------------+
 
 fpath=($ZDOTDIR/external $fpath)
+fpath=($ZDOTDIR/completions $fpath)
 autoload -U compinit; compinit
 
 # Autocomplete hidden files

@@ -1,0 +1,2186 @@
+#compdef govctl
+
+autoload -U is-at-least
+
+_govctl() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_govctl_commands" \
+"*::: :->govctl" \
+&& ret=0
+    case $state in
+    (govctl)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-command-$line[1]:"
+        case $line[1] in
+            (init)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'-f[Overwrite existing config]' \
+'--force[Overwrite existing config]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(sync-commands)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'-f[Force overwrite existing commands]' \
+'--force[Force overwrite existing commands]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(check)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'-W[Treat warnings as errors]' \
+'--deny-warnings[Treat warnings as errors]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(lint)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'-W[Treat warnings as errors]' \
+'--deny-warnings[Treat warnings as errors]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(status)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(stat)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(render)
+_arguments "${_arguments_options[@]}" : \
+'--rfc-id=[Specific RFC ID to render (e.g., RFC-0001)]:RFC_ID:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: show what would be written]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::target -- What to render\: rfc (default), adr, work, changelog, or all:((rfc\:"Render RFCs only (default, published to repo)"
+adr\:"Render ADRs (local only, .gitignore'\''d)"
+work\:"Render Work Items (local only, .gitignore'\''d)"
+changelog\:"Render CHANGELOG.md from completed work items"
+all\:"Render all artifact types (local use)"))' \
+&& ret=0
+;;
+(gen)
+_arguments "${_arguments_options[@]}" : \
+'--rfc-id=[Specific RFC ID to render (e.g., RFC-0001)]:RFC_ID:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: show what would be written]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::target -- What to render\: rfc (default), adr, work, changelog, or all:((rfc\:"Render RFCs only (default, published to repo)"
+adr\:"Render ADRs (local only, .gitignore'\''d)"
+work\:"Render Work Items (local only, .gitignore'\''d)"
+changelog\:"Render CHANGELOG.md from completed work items"
+all\:"Render all artifact types (local use)"))' \
+&& ret=0
+;;
+(rfc)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_govctl__rfc_commands" \
+"*::: :->rfc" \
+&& ret=0
+
+    case $state in
+    (rfc)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-rfc-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+'--id=[RFC ID (e.g., RFC-0010). Auto-generated if omitted]:ID:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':title -- RFC title:_default' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-n+[Limit number of results]:LIMIT:_default' \
+'--limit=[Limit number of results]:LIMIT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::filter -- Filter by status (draft|normative|deprecated), phase (spec|impl|test|stable), or ID pattern:_default' \
+&& ret=0
+;;
+(ls)
+_arguments "${_arguments_options[@]}" : \
+'-n+[Limit number of results]:LIMIT:_default' \
+'--limit=[Limit number of results]:LIMIT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::filter -- Filter by status (draft|normative|deprecated), phase (spec|impl|test|stable), or ID pattern:_default' \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- RFC ID:_default' \
+'::field -- Field name (omit to show all):_default' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--stdin[Read value from stdin]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- RFC ID:_default' \
+':field -- Field name:_default' \
+'::value -- New value (omit if using --stdin):_default' \
+&& ret=0
+;;
+(bump)
+_arguments "${_arguments_options[@]}" : \
+'-m+[Changelog summary]:SUMMARY:_default' \
+'--summary=[Changelog summary]:SUMMARY:_default' \
+'*-c+[Add change description(s)]:CHANGES:_default' \
+'*--change=[Add change description(s)]:CHANGES:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--patch[Patch version bump]' \
+'--minor[Minor version bump]' \
+'--major[Major version bump]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- RFC ID:_default' \
+&& ret=0
+;;
+(finalize)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- RFC ID:_default' \
+':status -- Target status:(normative deprecated)' \
+&& ret=0
+;;
+(advance)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- RFC ID:_default' \
+':phase -- Target phase:(spec impl test stable)' \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- RFC ID:_default' \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+'--by=[Replacement RFC ID]:BY:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- RFC ID to supersede:_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__rfc__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-rfc-help-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(bump)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(finalize)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(advance)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(clause)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_govctl__clause_commands" \
+"*::: :->clause" \
+&& ret=0
+
+    case $state in
+    (clause)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-clause-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+'-s+[Section to add the clause to]:SECTION:_default' \
+'--section=[Section to add the clause to]:SECTION:_default' \
+'-k+[Clause kind]:KIND:(normative informative)' \
+'--kind=[Clause kind]:KIND:(normative informative)' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':clause_id -- Clause ID (e.g., RFC-0010\:C-SCOPE):_default' \
+':title -- Clause title:_default' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-n+[Limit number of results]:LIMIT:_default' \
+'--limit=[Limit number of results]:LIMIT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::filter -- Filter by RFC ID or clause ID pattern:_default' \
+&& ret=0
+;;
+(ls)
+_arguments "${_arguments_options[@]}" : \
+'-n+[Limit number of results]:LIMIT:_default' \
+'--limit=[Limit number of results]:LIMIT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::filter -- Filter by RFC ID or clause ID pattern:_default' \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Clause ID (e.g., RFC-0001\:C-PHASE-ORDER):_default' \
+'::field -- Field name (omit to show all):_default' \
+&& ret=0
+;;
+(edit)
+_arguments "${_arguments_options[@]}" : \
+'--text=[Set text directly]:TEXT:_default' \
+'--text-file=[Read text from file]:TEXT_FILE:_files' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--stdin[Read text from stdin (recommended for multi-line)]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Clause ID:_default' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--stdin[Read value from stdin]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Clause ID:_default' \
+':field -- Field name:_default' \
+'::value -- New value (omit if using --stdin):_default' \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'-f[Force deletion without confirmation]' \
+'--force[Force deletion without confirmation]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Clause ID:_default' \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Clause ID:_default' \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+'--by=[Replacement clause ID]:BY:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Clause ID to supersede:_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__clause__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-clause-help-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(edit)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(adr)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_govctl__adr_commands" \
+"*::: :->adr" \
+&& ret=0
+
+    case $state in
+    (adr)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-adr-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':title -- ADR title:_default' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-n+[Limit number of results]:LIMIT:_default' \
+'--limit=[Limit number of results]:LIMIT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::filter -- Filter by status (proposed|accepted|rejected|superseded|deprecated) or ID pattern:_default' \
+&& ret=0
+;;
+(ls)
+_arguments "${_arguments_options[@]}" : \
+'-n+[Limit number of results]:LIMIT:_default' \
+'--limit=[Limit number of results]:LIMIT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::filter -- Filter by status (proposed|accepted|rejected|superseded|deprecated) or ID pattern:_default' \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- ADR ID:_default' \
+'::field -- Field name (omit to show all):_default' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--stdin[Read value from stdin]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- ADR ID:_default' \
+':field -- Field name:_default' \
+'::value -- New value (omit if using --stdin):_default' \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--stdin[Read value from stdin]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- ADR ID:_default' \
+':field -- Array field name:_default' \
+'::value -- Value to add (optional if --stdin):_default' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'--at=[Remove by index]:AT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--exact[Exact match]' \
+'--regex[Regex pattern]' \
+'--all[Remove all matches]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- ADR ID:_default' \
+':field -- Array field name:_default' \
+'::pattern -- Pattern to match:_default' \
+&& ret=0
+;;
+(accept)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- ADR ID:_default' \
+&& ret=0
+;;
+(reject)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- ADR ID:_default' \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- ADR ID:_default' \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+'--by=[Replacement ADR ID]:BY:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- ADR ID to supersede:_default' \
+&& ret=0
+;;
+(tick)
+_arguments "${_arguments_options[@]}" : \
+'-s+[New status]:STATUS:((done\:"Mark as done/accepted"
+pending\:"Mark as pending/considered"
+cancelled\:"Mark as cancelled/rejected"))' \
+'--status=[New status]:STATUS:((done\:"Mark as done/accepted"
+pending\:"Mark as pending/considered"
+cancelled\:"Mark as cancelled/rejected"))' \
+'--at=[Match by index]:AT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--exact[Exact match]' \
+'--regex[Regex pattern]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':id -- ADR ID:_default' \
+':field -- Field (decisions or alternatives):_default' \
+'::pattern -- Pattern to match:_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__adr__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-adr-help-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(accept)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(reject)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(tick)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(work)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_govctl__work_commands" \
+"*::: :->work" \
+&& ret=0
+
+    case $state in
+    (work)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-work-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--active[Immediately activate the work item]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':title -- Work item title:_default' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-n+[Limit number of results]:LIMIT:_default' \
+'--limit=[Limit number of results]:LIMIT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::filter -- Filter by status (queue|active|done|cancelled) or ID pattern:_default' \
+&& ret=0
+;;
+(ls)
+_arguments "${_arguments_options[@]}" : \
+'-n+[Limit number of results]:LIMIT:_default' \
+'--limit=[Limit number of results]:LIMIT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::filter -- Filter by status (queue|active|done|cancelled) or ID pattern:_default' \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Work item ID:_default' \
+'::field -- Field name (omit to show all):_default' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--stdin[Read value from stdin]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Work item ID:_default' \
+':field -- Field name:_default' \
+'::value -- New value (omit if using --stdin):_default' \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--stdin[Read value from stdin]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Work item ID:_default' \
+':field -- Array field name (e.g., refs, acceptance_criteria):_default' \
+'::value -- Value to add (optional if --stdin):_default' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'--at=[Remove by index]:AT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--exact[Exact match]' \
+'--regex[Regex pattern]' \
+'--all[Remove all matches]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Work item ID:_default' \
+':field -- Array field name:_default' \
+'::pattern -- Pattern to match:_default' \
+&& ret=0
+;;
+(move)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':file -- Work item file path or ID:_files' \
+':status -- Target status:(queue active done cancelled)' \
+&& ret=0
+;;
+(mv)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':file -- Work item file path or ID:_files' \
+':status -- Target status:(queue active done cancelled)' \
+&& ret=0
+;;
+(tick)
+_arguments "${_arguments_options[@]}" : \
+'-s+[New status]:STATUS:((done\:"Mark as done/accepted"
+pending\:"Mark as pending/considered"
+cancelled\:"Mark as cancelled/rejected"))' \
+'--status=[New status]:STATUS:((done\:"Mark as done/accepted"
+pending\:"Mark as pending/considered"
+cancelled\:"Mark as cancelled/rejected"))' \
+'--at=[Match by index]:AT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--exact[Exact match]' \
+'--regex[Regex pattern]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':id -- Work item ID:_default' \
+':field -- Field (acceptance_criteria):_default' \
+'::pattern -- Pattern to match:_default' \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'-f[Force deletion without confirmation]' \
+'--force[Force deletion without confirmation]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':id -- Work item ID:_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__work__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-work-help-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(move)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(tick)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(release)
+_arguments "${_arguments_options[@]}" : \
+'--date=[Release date (defaults to today)]:DATE:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':version -- Version number (semver, e.g., 0.2.0):_default' \
+&& ret=0
+;;
+(describe)
+_arguments "${_arguments_options[@]}" : \
+'--format=[Output format (currently only json is supported)]:FORMAT:_default' \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--context[Include project state and suggested actions]' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(completions)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':shell -- Shell to generate completions for:(bash elvish fish powershell zsh)' \
+&& ret=0
+;;
+(tui)
+_arguments "${_arguments_options[@]}" : \
+'-C+[Path to govctl config (TOML)]:CONFIG:_files' \
+'--config=[Path to govctl config (TOML)]:CONFIG:_files' \
+'--dry-run[Dry run\: preview changes without writing files]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-help-command-$line[1]:"
+        case $line[1] in
+            (init)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(sync-commands)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(check)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(status)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(render)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(rfc)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__help__rfc_commands" \
+"*::: :->rfc" \
+&& ret=0
+
+    case $state in
+    (rfc)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-help-rfc-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(bump)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(finalize)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(advance)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(clause)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__help__clause_commands" \
+"*::: :->clause" \
+&& ret=0
+
+    case $state in
+    (clause)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-help-clause-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(edit)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(adr)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__help__adr_commands" \
+"*::: :->adr" \
+&& ret=0
+
+    case $state in
+    (adr)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-help-adr-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(accept)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(reject)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(deprecate)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(supersede)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(tick)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(work)
+_arguments "${_arguments_options[@]}" : \
+":: :_govctl__help__work_commands" \
+"*::: :->work" \
+&& ret=0
+
+    case $state in
+    (work)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:govctl-help-work-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(get)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(move)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(tick)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(release)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(describe)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(completions)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(tui)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_govctl_commands] )) ||
+_govctl_commands() {
+    local commands; commands=(
+'init:Initialize govctl in the current directory' \
+'sync-commands:Sync Claude Desktop commands from assets to .claude/commands/' \
+'check:Validate all governed documents' \
+'lint:Validate all governed documents' \
+'status:Show summary counts' \
+'stat:Show summary counts' \
+'render:Render artifacts to markdown from SSOT' \
+'gen:Render artifacts to markdown from SSOT' \
+'rfc:RFC operations' \
+'clause:Clause operations' \
+'adr:ADR operations' \
+'work:Work item operations' \
+'release:Cut a release (collect unreleased work items into a version)' \
+'describe:Output machine-readable CLI metadata for agents' \
+'completions:Generate shell completion scripts' \
+'tui:Launch interactive TUI dashboard' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl commands' commands "$@"
+}
+(( $+functions[_govctl__adr_commands] )) ||
+_govctl__adr_commands() {
+    local commands; commands=(
+'new:Create a new ADR' \
+'list:List ADRs' \
+'ls:List ADRs' \
+'get:Get ADR field value' \
+'set:Set ADR field value' \
+'add:Add value to ADR array field' \
+'remove:Remove value from ADR array field' \
+'accept:Accept ADR (proposed → accepted)' \
+'reject:Reject ADR (proposed → rejected)' \
+'deprecate:Deprecate ADR' \
+'supersede:Supersede ADR' \
+'tick:Tick checklist item' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl adr commands' commands "$@"
+}
+(( $+functions[_govctl__adr__accept_commands] )) ||
+_govctl__adr__accept_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr accept commands' commands "$@"
+}
+(( $+functions[_govctl__adr__add_commands] )) ||
+_govctl__adr__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr add commands' commands "$@"
+}
+(( $+functions[_govctl__adr__deprecate_commands] )) ||
+_govctl__adr__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__adr__get_commands] )) ||
+_govctl__adr__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr get commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help_commands] )) ||
+_govctl__adr__help_commands() {
+    local commands; commands=(
+'new:Create a new ADR' \
+'list:List ADRs' \
+'get:Get ADR field value' \
+'set:Set ADR field value' \
+'add:Add value to ADR array field' \
+'remove:Remove value from ADR array field' \
+'accept:Accept ADR (proposed → accepted)' \
+'reject:Reject ADR (proposed → rejected)' \
+'deprecate:Deprecate ADR' \
+'supersede:Supersede ADR' \
+'tick:Tick checklist item' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl adr help commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__accept_commands] )) ||
+_govctl__adr__help__accept_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help accept commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__add_commands] )) ||
+_govctl__adr__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help add commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__deprecate_commands] )) ||
+_govctl__adr__help__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__get_commands] )) ||
+_govctl__adr__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help get commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__help_commands] )) ||
+_govctl__adr__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help help commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__list_commands] )) ||
+_govctl__adr__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help list commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__new_commands] )) ||
+_govctl__adr__help__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help new commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__reject_commands] )) ||
+_govctl__adr__help__reject_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help reject commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__remove_commands] )) ||
+_govctl__adr__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help remove commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__set_commands] )) ||
+_govctl__adr__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help set commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__supersede_commands] )) ||
+_govctl__adr__help__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help supersede commands' commands "$@"
+}
+(( $+functions[_govctl__adr__help__tick_commands] )) ||
+_govctl__adr__help__tick_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr help tick commands' commands "$@"
+}
+(( $+functions[_govctl__adr__list_commands] )) ||
+_govctl__adr__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr list commands' commands "$@"
+}
+(( $+functions[_govctl__adr__new_commands] )) ||
+_govctl__adr__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr new commands' commands "$@"
+}
+(( $+functions[_govctl__adr__reject_commands] )) ||
+_govctl__adr__reject_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr reject commands' commands "$@"
+}
+(( $+functions[_govctl__adr__remove_commands] )) ||
+_govctl__adr__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr remove commands' commands "$@"
+}
+(( $+functions[_govctl__adr__set_commands] )) ||
+_govctl__adr__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr set commands' commands "$@"
+}
+(( $+functions[_govctl__adr__supersede_commands] )) ||
+_govctl__adr__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr supersede commands' commands "$@"
+}
+(( $+functions[_govctl__adr__tick_commands] )) ||
+_govctl__adr__tick_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl adr tick commands' commands "$@"
+}
+(( $+functions[_govctl__check_commands] )) ||
+_govctl__check_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl check commands' commands "$@"
+}
+(( $+functions[_govctl__clause_commands] )) ||
+_govctl__clause_commands() {
+    local commands; commands=(
+'new:Create a new clause' \
+'list:List clauses' \
+'ls:List clauses' \
+'get:Get clause field value' \
+'edit:Edit clause text' \
+'set:Set clause field value' \
+'delete:Delete clause' \
+'deprecate:Deprecate clause' \
+'supersede:Supersede clause' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl clause commands' commands "$@"
+}
+(( $+functions[_govctl__clause__delete_commands] )) ||
+_govctl__clause__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause delete commands' commands "$@"
+}
+(( $+functions[_govctl__clause__deprecate_commands] )) ||
+_govctl__clause__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__clause__edit_commands] )) ||
+_govctl__clause__edit_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause edit commands' commands "$@"
+}
+(( $+functions[_govctl__clause__get_commands] )) ||
+_govctl__clause__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause get commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help_commands] )) ||
+_govctl__clause__help_commands() {
+    local commands; commands=(
+'new:Create a new clause' \
+'list:List clauses' \
+'get:Get clause field value' \
+'edit:Edit clause text' \
+'set:Set clause field value' \
+'delete:Delete clause' \
+'deprecate:Deprecate clause' \
+'supersede:Supersede clause' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl clause help commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__delete_commands] )) ||
+_govctl__clause__help__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help delete commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__deprecate_commands] )) ||
+_govctl__clause__help__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__edit_commands] )) ||
+_govctl__clause__help__edit_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help edit commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__get_commands] )) ||
+_govctl__clause__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help get commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__help_commands] )) ||
+_govctl__clause__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help help commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__list_commands] )) ||
+_govctl__clause__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help list commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__new_commands] )) ||
+_govctl__clause__help__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help new commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__set_commands] )) ||
+_govctl__clause__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help set commands' commands "$@"
+}
+(( $+functions[_govctl__clause__help__supersede_commands] )) ||
+_govctl__clause__help__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause help supersede commands' commands "$@"
+}
+(( $+functions[_govctl__clause__list_commands] )) ||
+_govctl__clause__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause list commands' commands "$@"
+}
+(( $+functions[_govctl__clause__new_commands] )) ||
+_govctl__clause__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause new commands' commands "$@"
+}
+(( $+functions[_govctl__clause__set_commands] )) ||
+_govctl__clause__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause set commands' commands "$@"
+}
+(( $+functions[_govctl__clause__supersede_commands] )) ||
+_govctl__clause__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl clause supersede commands' commands "$@"
+}
+(( $+functions[_govctl__completions_commands] )) ||
+_govctl__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl completions commands' commands "$@"
+}
+(( $+functions[_govctl__describe_commands] )) ||
+_govctl__describe_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl describe commands' commands "$@"
+}
+(( $+functions[_govctl__help_commands] )) ||
+_govctl__help_commands() {
+    local commands; commands=(
+'init:Initialize govctl in the current directory' \
+'sync-commands:Sync Claude Desktop commands from assets to .claude/commands/' \
+'check:Validate all governed documents' \
+'status:Show summary counts' \
+'render:Render artifacts to markdown from SSOT' \
+'rfc:RFC operations' \
+'clause:Clause operations' \
+'adr:ADR operations' \
+'work:Work item operations' \
+'release:Cut a release (collect unreleased work items into a version)' \
+'describe:Output machine-readable CLI metadata for agents' \
+'completions:Generate shell completion scripts' \
+'tui:Launch interactive TUI dashboard' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl help commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr_commands] )) ||
+_govctl__help__adr_commands() {
+    local commands; commands=(
+'new:Create a new ADR' \
+'list:List ADRs' \
+'get:Get ADR field value' \
+'set:Set ADR field value' \
+'add:Add value to ADR array field' \
+'remove:Remove value from ADR array field' \
+'accept:Accept ADR (proposed → accepted)' \
+'reject:Reject ADR (proposed → rejected)' \
+'deprecate:Deprecate ADR' \
+'supersede:Supersede ADR' \
+'tick:Tick checklist item' \
+    )
+    _describe -t commands 'govctl help adr commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__accept_commands] )) ||
+_govctl__help__adr__accept_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr accept commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__add_commands] )) ||
+_govctl__help__adr__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr add commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__deprecate_commands] )) ||
+_govctl__help__adr__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__get_commands] )) ||
+_govctl__help__adr__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr get commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__list_commands] )) ||
+_govctl__help__adr__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr list commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__new_commands] )) ||
+_govctl__help__adr__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr new commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__reject_commands] )) ||
+_govctl__help__adr__reject_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr reject commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__remove_commands] )) ||
+_govctl__help__adr__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr remove commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__set_commands] )) ||
+_govctl__help__adr__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr set commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__supersede_commands] )) ||
+_govctl__help__adr__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr supersede commands' commands "$@"
+}
+(( $+functions[_govctl__help__adr__tick_commands] )) ||
+_govctl__help__adr__tick_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help adr tick commands' commands "$@"
+}
+(( $+functions[_govctl__help__check_commands] )) ||
+_govctl__help__check_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help check commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause_commands] )) ||
+_govctl__help__clause_commands() {
+    local commands; commands=(
+'new:Create a new clause' \
+'list:List clauses' \
+'get:Get clause field value' \
+'edit:Edit clause text' \
+'set:Set clause field value' \
+'delete:Delete clause' \
+'deprecate:Deprecate clause' \
+'supersede:Supersede clause' \
+    )
+    _describe -t commands 'govctl help clause commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause__delete_commands] )) ||
+_govctl__help__clause__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help clause delete commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause__deprecate_commands] )) ||
+_govctl__help__clause__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help clause deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause__edit_commands] )) ||
+_govctl__help__clause__edit_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help clause edit commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause__get_commands] )) ||
+_govctl__help__clause__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help clause get commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause__list_commands] )) ||
+_govctl__help__clause__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help clause list commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause__new_commands] )) ||
+_govctl__help__clause__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help clause new commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause__set_commands] )) ||
+_govctl__help__clause__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help clause set commands' commands "$@"
+}
+(( $+functions[_govctl__help__clause__supersede_commands] )) ||
+_govctl__help__clause__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help clause supersede commands' commands "$@"
+}
+(( $+functions[_govctl__help__completions_commands] )) ||
+_govctl__help__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help completions commands' commands "$@"
+}
+(( $+functions[_govctl__help__describe_commands] )) ||
+_govctl__help__describe_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help describe commands' commands "$@"
+}
+(( $+functions[_govctl__help__help_commands] )) ||
+_govctl__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help help commands' commands "$@"
+}
+(( $+functions[_govctl__help__init_commands] )) ||
+_govctl__help__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help init commands' commands "$@"
+}
+(( $+functions[_govctl__help__release_commands] )) ||
+_govctl__help__release_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help release commands' commands "$@"
+}
+(( $+functions[_govctl__help__render_commands] )) ||
+_govctl__help__render_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help render commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc_commands] )) ||
+_govctl__help__rfc_commands() {
+    local commands; commands=(
+'new:Create a new RFC' \
+'list:List all RFCs' \
+'get:Get RFC field value' \
+'set:Set RFC field value' \
+'bump:Bump RFC version' \
+'finalize:Finalize RFC status (draft → normative or deprecated)' \
+'advance:Advance RFC phase' \
+'deprecate:Deprecate RFC' \
+'supersede:Supersede RFC' \
+    )
+    _describe -t commands 'govctl help rfc commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__advance_commands] )) ||
+_govctl__help__rfc__advance_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc advance commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__bump_commands] )) ||
+_govctl__help__rfc__bump_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc bump commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__deprecate_commands] )) ||
+_govctl__help__rfc__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__finalize_commands] )) ||
+_govctl__help__rfc__finalize_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc finalize commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__get_commands] )) ||
+_govctl__help__rfc__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc get commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__list_commands] )) ||
+_govctl__help__rfc__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc list commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__new_commands] )) ||
+_govctl__help__rfc__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc new commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__set_commands] )) ||
+_govctl__help__rfc__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc set commands' commands "$@"
+}
+(( $+functions[_govctl__help__rfc__supersede_commands] )) ||
+_govctl__help__rfc__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help rfc supersede commands' commands "$@"
+}
+(( $+functions[_govctl__help__status_commands] )) ||
+_govctl__help__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help status commands' commands "$@"
+}
+(( $+functions[_govctl__help__sync-commands_commands] )) ||
+_govctl__help__sync-commands_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help sync-commands commands' commands "$@"
+}
+(( $+functions[_govctl__help__tui_commands] )) ||
+_govctl__help__tui_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help tui commands' commands "$@"
+}
+(( $+functions[_govctl__help__work_commands] )) ||
+_govctl__help__work_commands() {
+    local commands; commands=(
+'new:Create a new work item' \
+'list:List work items' \
+'get:Get work item field value' \
+'set:Set work item field value' \
+'add:Add value to work item array field' \
+'remove:Remove value from work item array field' \
+'move:Move work item to new status' \
+'tick:Tick acceptance criteria item' \
+'delete:Delete work item' \
+    )
+    _describe -t commands 'govctl help work commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__add_commands] )) ||
+_govctl__help__work__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work add commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__delete_commands] )) ||
+_govctl__help__work__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work delete commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__get_commands] )) ||
+_govctl__help__work__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work get commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__list_commands] )) ||
+_govctl__help__work__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work list commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__move_commands] )) ||
+_govctl__help__work__move_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work move commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__new_commands] )) ||
+_govctl__help__work__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work new commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__remove_commands] )) ||
+_govctl__help__work__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work remove commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__set_commands] )) ||
+_govctl__help__work__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work set commands' commands "$@"
+}
+(( $+functions[_govctl__help__work__tick_commands] )) ||
+_govctl__help__work__tick_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl help work tick commands' commands "$@"
+}
+(( $+functions[_govctl__init_commands] )) ||
+_govctl__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl init commands' commands "$@"
+}
+(( $+functions[_govctl__release_commands] )) ||
+_govctl__release_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl release commands' commands "$@"
+}
+(( $+functions[_govctl__render_commands] )) ||
+_govctl__render_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl render commands' commands "$@"
+}
+(( $+functions[_govctl__rfc_commands] )) ||
+_govctl__rfc_commands() {
+    local commands; commands=(
+'new:Create a new RFC' \
+'list:List all RFCs' \
+'ls:List all RFCs' \
+'get:Get RFC field value' \
+'set:Set RFC field value' \
+'bump:Bump RFC version' \
+'finalize:Finalize RFC status (draft → normative or deprecated)' \
+'advance:Advance RFC phase' \
+'deprecate:Deprecate RFC' \
+'supersede:Supersede RFC' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl rfc commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__advance_commands] )) ||
+_govctl__rfc__advance_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc advance commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__bump_commands] )) ||
+_govctl__rfc__bump_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc bump commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__deprecate_commands] )) ||
+_govctl__rfc__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__finalize_commands] )) ||
+_govctl__rfc__finalize_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc finalize commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__get_commands] )) ||
+_govctl__rfc__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc get commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help_commands] )) ||
+_govctl__rfc__help_commands() {
+    local commands; commands=(
+'new:Create a new RFC' \
+'list:List all RFCs' \
+'get:Get RFC field value' \
+'set:Set RFC field value' \
+'bump:Bump RFC version' \
+'finalize:Finalize RFC status (draft → normative or deprecated)' \
+'advance:Advance RFC phase' \
+'deprecate:Deprecate RFC' \
+'supersede:Supersede RFC' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl rfc help commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__advance_commands] )) ||
+_govctl__rfc__help__advance_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help advance commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__bump_commands] )) ||
+_govctl__rfc__help__bump_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help bump commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__deprecate_commands] )) ||
+_govctl__rfc__help__deprecate_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help deprecate commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__finalize_commands] )) ||
+_govctl__rfc__help__finalize_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help finalize commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__get_commands] )) ||
+_govctl__rfc__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help get commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__help_commands] )) ||
+_govctl__rfc__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help help commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__list_commands] )) ||
+_govctl__rfc__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help list commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__new_commands] )) ||
+_govctl__rfc__help__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help new commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__set_commands] )) ||
+_govctl__rfc__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help set commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__help__supersede_commands] )) ||
+_govctl__rfc__help__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc help supersede commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__list_commands] )) ||
+_govctl__rfc__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc list commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__new_commands] )) ||
+_govctl__rfc__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc new commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__set_commands] )) ||
+_govctl__rfc__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc set commands' commands "$@"
+}
+(( $+functions[_govctl__rfc__supersede_commands] )) ||
+_govctl__rfc__supersede_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl rfc supersede commands' commands "$@"
+}
+(( $+functions[_govctl__status_commands] )) ||
+_govctl__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl status commands' commands "$@"
+}
+(( $+functions[_govctl__sync-commands_commands] )) ||
+_govctl__sync-commands_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl sync-commands commands' commands "$@"
+}
+(( $+functions[_govctl__tui_commands] )) ||
+_govctl__tui_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl tui commands' commands "$@"
+}
+(( $+functions[_govctl__work_commands] )) ||
+_govctl__work_commands() {
+    local commands; commands=(
+'new:Create a new work item' \
+'list:List work items' \
+'ls:List work items' \
+'get:Get work item field value' \
+'set:Set work item field value' \
+'add:Add value to work item array field' \
+'remove:Remove value from work item array field' \
+'move:Move work item to new status' \
+'mv:Move work item to new status' \
+'tick:Tick acceptance criteria item' \
+'delete:Delete work item' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl work commands' commands "$@"
+}
+(( $+functions[_govctl__work__add_commands] )) ||
+_govctl__work__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work add commands' commands "$@"
+}
+(( $+functions[_govctl__work__delete_commands] )) ||
+_govctl__work__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work delete commands' commands "$@"
+}
+(( $+functions[_govctl__work__get_commands] )) ||
+_govctl__work__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work get commands' commands "$@"
+}
+(( $+functions[_govctl__work__help_commands] )) ||
+_govctl__work__help_commands() {
+    local commands; commands=(
+'new:Create a new work item' \
+'list:List work items' \
+'get:Get work item field value' \
+'set:Set work item field value' \
+'add:Add value to work item array field' \
+'remove:Remove value from work item array field' \
+'move:Move work item to new status' \
+'tick:Tick acceptance criteria item' \
+'delete:Delete work item' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'govctl work help commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__add_commands] )) ||
+_govctl__work__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help add commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__delete_commands] )) ||
+_govctl__work__help__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help delete commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__get_commands] )) ||
+_govctl__work__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help get commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__help_commands] )) ||
+_govctl__work__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help help commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__list_commands] )) ||
+_govctl__work__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help list commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__move_commands] )) ||
+_govctl__work__help__move_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help move commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__new_commands] )) ||
+_govctl__work__help__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help new commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__remove_commands] )) ||
+_govctl__work__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help remove commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__set_commands] )) ||
+_govctl__work__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help set commands' commands "$@"
+}
+(( $+functions[_govctl__work__help__tick_commands] )) ||
+_govctl__work__help__tick_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work help tick commands' commands "$@"
+}
+(( $+functions[_govctl__work__list_commands] )) ||
+_govctl__work__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work list commands' commands "$@"
+}
+(( $+functions[_govctl__work__move_commands] )) ||
+_govctl__work__move_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work move commands' commands "$@"
+}
+(( $+functions[_govctl__work__new_commands] )) ||
+_govctl__work__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work new commands' commands "$@"
+}
+(( $+functions[_govctl__work__remove_commands] )) ||
+_govctl__work__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work remove commands' commands "$@"
+}
+(( $+functions[_govctl__work__set_commands] )) ||
+_govctl__work__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work set commands' commands "$@"
+}
+(( $+functions[_govctl__work__tick_commands] )) ||
+_govctl__work__tick_commands() {
+    local commands; commands=()
+    _describe -t commands 'govctl work tick commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_govctl" ]; then
+    _govctl "$@"
+else
+    compdef _govctl govctl
+fi
