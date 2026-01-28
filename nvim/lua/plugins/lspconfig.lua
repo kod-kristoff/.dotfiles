@@ -19,6 +19,7 @@ return {
 		},
 		config = function()
 			vim.lsp.config("lua_ls", {})
+			vim.lsp.enable("ty")
 			-- local lspconfig = vim.lsp.config
 			-- local mason_lspconfig = require("mason-lspconfig")
 			--
