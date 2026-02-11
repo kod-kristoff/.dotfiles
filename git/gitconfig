@@ -16,6 +16,8 @@
 	external = difft
 	submodule = log
 	colorMoved = default
+[url "git@codeberg.org:/"]
+    insteadOf = https://codeberg.org/
 # [url "git@github.com:/"]
 #	insteadOf = https://github.com/
 [alias]
