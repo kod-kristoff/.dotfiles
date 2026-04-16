@@ -7,12 +7,19 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
-  "disable_ai": true,
-  "features": {
-    "edit_prediction_provider": "none"
+  "colorize_brackets": true,
+  "edit_predictions": {
+    "provider": "none"
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
+  "toolbar": {
+    "agent_review": false
+  },
+  "minimap": {
+    "show": "never"
+  },
+  "disable_ai": true,
+  "ui_font_size": 12.0,
+  "buffer_font_size": 12.0,
   "theme": {
     "mode": "system",
     "light": "Monokai Charcoal (yellow)",
