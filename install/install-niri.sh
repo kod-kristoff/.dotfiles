@@ -1,0 +1,13 @@
+mkdir -p "$HOME/.config/niri"
+mkdir -p "$HOME/.config/niri/dms"
+
+ln -sf "$HOME/.dotfiles/niri/config.kdl" "$HOME/.config/niri/config.kdl"
+ln -sf "$HOME/.dotfiles/niri/binds.kdl" "$HOME/.config/niri/binds.kdl"
+ln -sf "$HOME/.dotfiles/niri/dms/alttab.kdl" "$HOME/.config/niri/dms/alttab.kdl"
+ln -sf "$HOME/.dotfiles/niri/dms/binds.kdl" "$HOME/.config/niri/dms/binds.kdl"
+ln -sf "$HOME/.dotfiles/niri/dms/colors.kdl" "$HOME/.config/niri/dms/colors.kdl"
+ln -sf "$HOME/.dotfiles/niri/dms/cursor.kdl" "$HOME/.config/niri/dms/cursor.kdl"
+ln -sf "$HOME/.dotfiles/niri/dms/layout.kdl" "$HOME/.config/niri/dms/layout.kdl"
+ln -sf "$HOME/.dotfiles/niri/dms/outputs.kdl" "$HOME/.config/niri/dms/outputs.kdl"
+ln -sf "$HOME/.dotfiles/niri/dms/windowrules.kdl" "$HOME/.config/niri/dms/windowrules.kdl"
+ln -sf "$HOME/.dotfiles/niri/dms/wpblur.kdl" "$HOME/.config/niri/dms/wpblur.kdl"

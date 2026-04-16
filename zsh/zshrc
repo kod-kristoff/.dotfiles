@@ -114,3 +114,5 @@ if [ $(command -v "direnv") ];
 then
     eval "$(direnv hook zsh)"
 fi
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"

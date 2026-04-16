@@ -1,0 +1,5 @@
+
+binds {
+    "Super+Shift+Hyphen" { spawn "qs" "-c" "dms ipc call keybinds toggle niri"; }
+    Super+Shift+Acute { set-window-height "+10%"; }
+}
