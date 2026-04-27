@@ -7,6 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "colorize_brackets": true,
   "edit_predictions": {
     "provider": "none"
@@ -41,6 +55,7 @@
   // Decrease the horizontal indent size of files & folders in the project
   // panel to avoid horizontal scrolling
   "project_panel": {
+    "dock": "left",
     "indent_size": 16
   },
 
