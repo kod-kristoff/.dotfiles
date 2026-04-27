@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ln -s "$DOTFILES/deno/deno.json" "$HOME/deno.json"
+ln -sf "$DOTFILES/deno/deno.json" "$HOME/deno.json"
