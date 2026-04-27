@@ -45,7 +45,7 @@ binds {
     Mod+X hotkey-overlay-title="Power Menu: Toggle" { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
     Mod+Y hotkey-overlay-title="Browse wallpapers" { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
     Mod+Less hotkey-overlay-title="Switch windows" { spawn "dms" "ipc" "call" "spotlight" "toggleQuery" "<"; }
-    Mod+L hotkey-overlay-title="Lock screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
+    Mod+Alt+L hotkey-overlay-title="Lock screen" { spawn "dms" "ipc" "call" "lock" "lock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -82,10 +82,10 @@ binds {
     Mod+Down hotkey-overlay-title="Focus window or workspace below" { focus-window-or-workspace-down; }
     Mod+Left hotkey-overlay-title="Focus column to the left" { focus-column-left; }
     Mod+Right hotkey-overlay-title="Focus column to the right" { focus-column-right; }
-    Mod+W hotkey-overlay-title="Focus window or workspace above" { focus-window-or-workspace-up; }
-    Mod+S hotkey-overlay-title="Focus window or workspace below" { focus-window-or-workspace-down; }
-    Mod+A hotkey-overlay-title="Focus column to the left" { focus-column-left; }
-    Mod+D hotkey-overlay-title="Focus column to the right" { focus-column-right; }
+    Mod+K hotkey-overlay-title="Focus window or workspace above" { focus-window-or-workspace-up; }
+    Mod+J hotkey-overlay-title="Focus window or workspace below" { focus-window-or-workspace-down; }
+    Mod+H hotkey-overlay-title="Focus column to the left" { focus-column-left; }
+    Mod+L hotkey-overlay-title="Focus column to the right" { focus-column-right; }
 
     Mod+Ctrl+Up hotkey-overlay-title="Move window up or to workspace above" { move-window-up-or-to-workspace-up; }
     Mod+Ctrl+Down hotkey-overlay-title="Move window down or to workspace below" { move-window-down-or-to-workspace-down; }
