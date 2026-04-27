@@ -55,5 +55,6 @@ dot_is_installed npm && dot_install npm
 dot_is_installed nvim && dot_install nvim
 dot_is_installed pnpm && dot_install pnpm
 dot_is_installed sway && dot_install sway
-dot_is_installed zeditor && dot_install zed
 dot_is_installed uv && dot_install uv
+dot_is_installed yarn && dot_install yarn
+dot_is_installed zeditor && dot_install zed
