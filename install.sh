@@ -52,3 +52,4 @@ dot_is_installed nvim && dot_install nvim
 dot_is_installed sway && dot_install sway
 dot_is_installed zeditor && dot_install zed
 dot_is_installed niri && dot_install niri
+dot_is_installed uv && dot_install uv
