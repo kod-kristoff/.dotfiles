@@ -46,6 +46,7 @@ source "$DOTFILES/zsh/scripts.zsh"
 # | Prompt |
 # +--------+
 
+SPACESHIP_EXIT_CODE_SHOW=true
 #fpath=($DOTFILES/zsh/prompt $fpath)
 #source $DOTFILES/zsh/prompt/prompt_purification_setup
 eval "$(starship init zsh)"
@@ -90,13 +91,24 @@ source "$DOTFILES/zsh/external/completion.zsh"
 
 if [ $(command -v "fzf") ];
 then
-    if [ -e /usr/share/fzf/completion.zsh ]; 
+    if [ -e /usr/share/fzf/completion.zsh ];
     then
         source /usr/share/fzf/completion.zsh
-        source /usr/share/fzf/key-bindings.zsh
-    else
+    elif [ -e /data/data/com.termux/files/usr/share/fzf/completion.zsh ];
+    then
         source /data/data/com.termux/files/usr/share/fzf/completion.zsh
+    else
+        echo "WARNING: fzf/completio.zsh was not found, using bundled"
+        source "$DOTFILES/zsh/completions/fzf-completion.zsh"
+    fi
+    if [ -e /usr/share/fzf/key-bindings.zsh ];
+        source /usr/share/fzf/key-bindings.zsh
+    then
+    elif [ -e /data/data/com.termux/files/usr/share/fzf/key-bindings.zsh ];
+    then
         source /data/data/com.termux/files/usr/share/fzf/key-bindings.zsh
+    else
+        echo "WARNING: fzf/key-bindings.zsh was not found"
     fi
 fi
 
