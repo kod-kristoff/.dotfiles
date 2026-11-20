@@ -98,7 +98,7 @@ then
     then
         source /data/data/com.termux/files/usr/share/fzf/completion.zsh
     else
-        echo "WARNING: fzf/completion.zsh was not found, using bundled"
+        echo "INFO: fzf/completion.zsh was not found, using bundled"
         source "$DOTFILES/zsh/completions/fzf-completion.zsh"
     fi
     if [ -e /usr/share/fzf/key-bindings.zsh ];
