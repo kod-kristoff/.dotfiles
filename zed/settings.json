@@ -7,29 +7,30 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "cli_default_open_behavior": "existing_window",
   "outline_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "agent": {
     "dock": "right",
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "git_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "colorize_brackets": true,
   "edit_predictions": {
-    "provider": "none"
+    "provider": "none",
   },
   "toolbar": {
-    "agent_review": false
+    "agent_review": false,
   },
   "minimap": {
-    "show": "never"
+    "show": "never",
   },
   "disable_ai": true,
   "ui_font_size": 12.0,
@@ -37,26 +38,26 @@
   "theme": {
     "mode": "system",
     "light": "Monokai Charcoal (yellow)",
-    "dark": "One Dark"
+    "dark": "One Dark",
   },
   // Remove the < > buttons from the tab bar
   "tab_bar": {
     "show": true,
-    "show_nav_history_buttons": false
+    "show_nav_history_buttons": false,
   },
 
   // Show file type icons in the tab bar. Also color them according to the
   // git status.
   "tabs": {
     "file_icons": true,
-    "git_status": true
+    "git_status": true,
   },
 
   // Decrease the horizontal indent size of files & folders in the project
   // panel to avoid horizontal scrolling
   "project_panel": {
     "dock": "left",
-    "indent_size": 16
+    "indent_size": 16,
   },
 
   // Set a preferred line lenth, showing a vertical gutter bar
@@ -64,6 +65,9 @@
 
   // Enable Vim mode. You probably found this already if you care.
   "vim_mode": true,
+
+  // Use podman fo devcontainers
+  "use_podman": true,
 
   // Use relative line numbers.
   "relative_line_numbers": "enabled",
@@ -83,12 +87,12 @@
         { "code_action": "source.organizeImports.ruff" },
         { "code_action": "source.fixAll.ruff" },
         {
-          "language_server": { "name": "ruff" }
-        }
+          "language_server": { "name": "ruff" },
+        },
       ],
       // "language_servers": ["ruff"]
       // Or, if there are other language servers you want to use with Python
-      "language_servers": ["ty", "!pyrefly", "ruff", "!pylsp", "!basedpyright", "!pyright"]
+      "language_servers": ["ty", "!pyrefly", "ruff", "!pylsp", "!basedpyright", "!pyright"],
     },
     "Markdown": {
       // Wrap text according to the previously defined preferred line length.
@@ -97,35 +101,34 @@
 
       // do not remove any trailing whitespace since line breaks in
       // lists (without adding a new punctuation) rely on whitespaces.
-      "remove_trailing_whitespace_on_save": false
+      "remove_trailing_whitespace_on_save": false,
     },
     "TOML": { "format_on_save": "on", "language_servers": ["tombi"] },
-    "YAML": { "tab_size": 2, "formatter": "language_server" }
+    "YAML": { "tab_size": 2, "formatter": "language_server" },
   },
   "lsp": {
     "rust-analyzer": {
+      "enable_lsp_tasks": true,
       "initialization_options": {
-        "checkOnSave": {
-          "enable": true,
-          "command": "clippy"
-        }
-      }
+        "checkOnSave": true,
+        "check": { "command": "clippy" },
+      },
     },
     "ty": {
       "binary": {
         "path": "/usr/bin/ty",
-        "arguments": ["server"]
-      }
+        "arguments": ["server"],
+      },
     },
     "yaml-language-server": {
       "settings": {
         "yaml": {
           "keyOrdering": false,
           "format": {
-            "singleQuote": false
-          }
-        }
-      }
-    }
-  }
+            "singleQuote": false,
+          },
+        },
+      },
+    },
+  },
 }
