@@ -625,6 +625,12 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 }
 
+// Workaround to make web-clipper -> obsidian work
+// https://github.com/niri-wm/niri/wiki/Configuration:-Debug-Options#honor-xdg-activation-with-invalid-serial
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
 include "binds.kdl"
 
 // include "dms/binds.kdl"
