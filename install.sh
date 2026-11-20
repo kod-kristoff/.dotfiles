@@ -58,3 +58,6 @@ dot_is_installed sway && dot_install sway
 dot_is_installed uv && dot_install uv
 dot_is_installed yarn && dot_install yarn
 dot_is_installed zeditor && dot_install zed
+# If zed is installed from https://zed.dev/install.sh it is called zed
+# Used on fedora
+dot_is_installed zed && dot_install zed
